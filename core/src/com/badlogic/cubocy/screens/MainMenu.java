@@ -1,4 +1,3 @@
-
 package com.badlogic.cubocy.screens;
 
 import com.badlogic.gdx.Game;
@@ -11,46 +10,47 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MainMenu extends CubocScreen
 {
-	TextureRegion title;
-	SpriteBatch batch;
-	float time = 0;
 
-	public MainMenu(Game game)
-	{
-		super(game);
-	}
+    TextureRegion title;
+    SpriteBatch batch;
+    float time = 0;
 
-	@Override
-	public void show()
-	{
-		title = new TextureRegion(new Texture(Gdx.files.internal("cuboc/data/title.png")), 0, 0, 480, 320);
-		batch = new SpriteBatch();
-		batch.getProjectionMatrix().setToOrtho2D(0, 0, 480, 320);
-	}
+    public MainMenu(Game game)
+    {
+        super(game);
+    }
 
-	@Override
-	public void render(float delta)
-	{
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(title, 0, 0);
-		batch.end();
+    @Override
+    public void show()
+    {
+        title = new TextureRegion(new Texture(Gdx.files.internal("cuboc/data/title.png")), 0, 0, 480, 320);
+        batch = new SpriteBatch();
+        batch.getProjectionMatrix().setToOrtho2D(0, 0, 480, 320);
+    }
 
-		time += delta;
-		if (time > 1)
-		{
-			if (Gdx.input.isKeyPressed(Keys.ANY_KEY) || Gdx.input.justTouched())
-			{
-				game.setScreen(new IntroScreen(game));
-			}
-		}
-	}
+    @Override
+    public void render(float delta)
+    {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(title, 0, 0);
+        batch.end();
 
-	@Override
-	public void hide()
-	{
-		Gdx.app.debug("Cubocy", "dispose main menu");
-		batch.dispose();
-		title.getTexture().dispose();
-	}
+        time += delta;
+        if (time > 1)
+        {
+            if (Gdx.input.isKeyPressed(Keys.ANY_KEY) || Gdx.input.justTouched())
+            {
+                game.setScreen(new IntroScreen(game));
+            }
+        }
+    }
+
+    @Override
+    public void hide()
+    {
+        Gdx.app.debug("Cubocy", "dispose main menu");
+        batch.dispose();
+        title.getTexture().dispose();
+    }
 }

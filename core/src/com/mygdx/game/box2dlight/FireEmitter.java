@@ -13,38 +13,37 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 /**
  * Created by julienvillegas on 09/12/2017.
  */
-
 public class FireEmitter extends Actor
 {
 
-	ParticleEffect fireEmitter;
+    ParticleEffect fireEmitter;
 
-	public FireEmitter(World aWorld)
-	{
-		TextureAtlas textureAtlas = new TextureAtlas();
-		textureAtlas.addRegion("particle", new TextureRegion(new Texture("box2dlight/particle.png")));
-		fireEmitter = new ParticleEffect();
-		fireEmitter.load(Gdx.files.internal("box2dlight/continous.p"), textureAtlas);
-		fireEmitter.getEmitters().add(new ParticleEmitterBox2D(aWorld, fireEmitter.getEmitters().first()));
-		fireEmitter.getEmitters().removeIndex(0);
-		fireEmitter.setPosition(5, 2);
-		fireEmitter.scaleEffect(0.013f);
-		fireEmitter.start();
+    public FireEmitter(World aWorld)
+    {
+        TextureAtlas textureAtlas = new TextureAtlas();
+        textureAtlas.addRegion("particle", new TextureRegion(new Texture("box2dlight/particle.png")));
+        fireEmitter = new ParticleEffect();
+        fireEmitter.load(Gdx.files.internal("box2dlight/continous.p"), textureAtlas);
+        fireEmitter.getEmitters().add(new ParticleEmitterBox2D(aWorld, fireEmitter.getEmitters().first()));
+        fireEmitter.getEmitters().removeIndex(0);
+        fireEmitter.setPosition(5, 2);
+        fireEmitter.scaleEffect(0.013f);
+        fireEmitter.start();
 
-	}
+    }
 
-	@Override
-	public void act(float delta)
-	{
-		super.act(delta);
-		fireEmitter.update(delta);
-	}
+    @Override
+    public void act(float delta)
+    {
+        super.act(delta);
+        fireEmitter.update(delta);
+    }
 
-	@Override
-	public void draw(Batch batch, float parentAlpha)
-	{
-		super.draw(batch, parentAlpha);
-		fireEmitter.draw(batch);
-	}
+    @Override
+    public void draw(Batch batch, float parentAlpha)
+    {
+        super.draw(batch, parentAlpha);
+        fireEmitter.draw(batch);
+    }
 
 }

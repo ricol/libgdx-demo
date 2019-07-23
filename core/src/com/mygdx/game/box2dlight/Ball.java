@@ -16,94 +16,94 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 /**
  * Created by julienvillegas on 07/12/2017.
  */
-
 public class Ball extends Image
 {
-	private Body body;
-	private World world;
-	private boolean delete;
-	static private final Texture texture = new Texture("box2dlight/bubble.png");
-	ParticleEffect explosionEffect;
-	private boolean exploding;
 
-	public Ball(World aWorld, float pos_x, float pos_y)
-	{
-		super(texture);
-		this.setSize(0.5f, 0.5f);
-		this.setPosition(pos_x, pos_y);
+    private Body body;
+    private World world;
+    private boolean delete;
+    static private final Texture texture = new Texture("box2dlight/bubble.png");
+    ParticleEffect explosionEffect;
+    private boolean exploding;
 
-		world = aWorld;
-		BodyDef bd = new BodyDef();
-		bd.position.set(this.getX(), this.getY());
-		bd.type = BodyDef.BodyType.DynamicBody;
+    public Ball(World aWorld, float pos_x, float pos_y)
+    {
+        super(texture);
+        this.setSize(0.5f, 0.5f);
+        this.setPosition(pos_x, pos_y);
 
-		body = world.createBody(bd);
-		CircleShape circle = new CircleShape();
-		circle.setRadius(this.getWidth() / 2);
-		exploding = false;
+        world = aWorld;
+        BodyDef bd = new BodyDef();
+        bd.position.set(this.getX(), this.getY());
+        bd.type = BodyDef.BodyType.DynamicBody;
 
-		// 2. Create a FixtureDef, as usual.
-		FixtureDef fd = new FixtureDef();
-		fd.density = 10;
-		fd.friction = 0.5f;
-		fd.restitution = 0.6f;
-		fd.shape = circle;
+        body = world.createBody(bd);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(this.getWidth() / 2);
+        exploding = false;
 
-		Fixture fixture = body.createFixture(fd);
-		body.setUserData(this);
+        // 2. Create a FixtureDef, as usual.
+        FixtureDef fd = new FixtureDef();
+        fd.density = 10;
+        fd.friction = 0.5f;
+        fd.restitution = 0.6f;
+        fd.shape = circle;
 
-		this.setOrigin(this.getWidth() / 2, this.getHeight() / 2);
-		circle.dispose();
+        Fixture fixture = body.createFixture(fd);
+        body.setUserData(this);
 
-	}
+        this.setOrigin(this.getWidth() / 2, this.getHeight() / 2);
+        circle.dispose();
 
-	@Override
-	public void draw(Batch batch, float parentAlpha)
-	{
-		super.draw(batch, parentAlpha);
-		if (exploding)
-		{
-			explosionEffect.draw(batch);
-		}
+    }
 
-	}
+    @Override
+    public void draw(Batch batch, float parentAlpha)
+    {
+        super.draw(batch, parentAlpha);
+        if (exploding)
+        {
+            explosionEffect.draw(batch);
+        }
 
-	@Override
-	public void act(float delta)
-	{
-		super.act(delta);
-		if (exploding)
-		{
-			explosionEffect.update(delta);
+    }
 
-			if (explosionEffect.isComplete())
-			{
-				explosionEffect.dispose();
-				world.destroyBody(body);
-				this.delete = true;
-			}
-		}
-		this.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-		this.setPosition(body.getPosition().x - this.getWidth() / 2, body.getPosition().y - this.getHeight() / 2);
-		if (delete)
-		{
-			this.remove();
-		}
-	}
+    @Override
+    public void act(float delta)
+    {
+        super.act(delta);
+        if (exploding)
+        {
+            explosionEffect.update(delta);
 
-	public void explode(ParticleEffect effect)
-	{
+            if (explosionEffect.isComplete())
+            {
+                explosionEffect.dispose();
+                world.destroyBody(body);
+                this.delete = true;
+            }
+        }
+        this.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+        this.setPosition(body.getPosition().x - this.getWidth() / 2, body.getPosition().y - this.getHeight() / 2);
+        if (delete)
+        {
+            this.remove();
+        }
+    }
 
-		explosionEffect = effect;
-		explosionEffect.getEmitters().add(new ParticleEmitterBox2D(world, explosionEffect.getEmitters().first()));
-		explosionEffect.getEmitters().removeIndex(0);
-		explosionEffect.setPosition(this.getX() + this.getWidth() / 2, this.getY());
-		explosionEffect.scaleEffect(0.01f);
+    public void explode(ParticleEffect effect)
+    {
 
-		explosionEffect.start();
+        explosionEffect = effect;
+        explosionEffect.getEmitters().add(new ParticleEmitterBox2D(world, explosionEffect.getEmitters().first()));
+        explosionEffect.getEmitters().removeIndex(0);
+        explosionEffect.setPosition(this.getX() + this.getWidth() / 2, this.getY());
+        explosionEffect.scaleEffect(0.01f);
 
-		exploding = true;
+        explosionEffect.start();
 
-	}
+        exploding = true;
+
+    }
 
 }

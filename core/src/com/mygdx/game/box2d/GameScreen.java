@@ -19,95 +19,96 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class GameScreen implements Screen
 {
 
-	private Stage stage;
-	private Game game;
-	private World world;
-	private Box2DDebugRenderer debugRenderer;
+    private Stage stage;
+    private Game game;
+    private World world;
+    private Box2DDebugRenderer debugRenderer;
 
-	public GameScreen(Game aGame)
-	{
-		game = aGame;
-		Gdx.input.setInputProcessor(stage);
-		stage = new Stage(new ScreenViewport());
-		debugRenderer = new Box2DDebugRenderer();
-		world = new World(new Vector2(0, -1000), true);
+    public GameScreen(Game aGame)
+    {
+        game = aGame;
+        Gdx.input.setInputProcessor(stage);
+        stage = new Stage(new ScreenViewport());
+        debugRenderer = new Box2DDebugRenderer();
+        world = new World(new Vector2(0, -1000), true);
 
-		MusicalNote musicalNote = new MusicalNote(world, Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight());
-		stage.addActor(musicalNote);
-		musicalNote.addListener(new InputListener() {
+        MusicalNote musicalNote = new MusicalNote(world, Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight());
+        stage.addActor(musicalNote);
+        musicalNote.addListener(new InputListener()
+        {
 
-			public void clicked(InputEvent event, float x, float y, int pointer, int button)
-			{
-				System.out.println("X:" + x + " Y:" + y);
-				// return true;
-			}
+            public void clicked(InputEvent event, float x, float y, int pointer, int button)
+            {
+                System.out.println("X:" + x + " Y:" + y);
+                // return true;
+            }
 
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-			{
-				System.out.println("X:" + x + " Y:" + y);
-				return true;
-			}
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                System.out.println("X:" + x + " Y:" + y);
+                return true;
+            }
 
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button)
-			{
-				System.out.println("touchup");
-			}
-		});
-		musicalNote.setTouchable(Touchable.enabled);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button)
+            {
+                System.out.println("touchup");
+            }
+        });
+        musicalNote.setTouchable(Touchable.enabled);
 
-		stage.addActor(new Floor(world, 0, Gdx.graphics.getHeight() / 3, Gdx.graphics.getWidth() * 2 / 3,
-				Gdx.graphics.getHeight() / 10, -30));
+        stage.addActor(new Floor(world, 0, Gdx.graphics.getHeight() / 3, Gdx.graphics.getWidth() * 2 / 3,
+            Gdx.graphics.getHeight() / 10, -30));
 
-	}
+    }
 
-	@Override
-	public void show()
-	{
-		Gdx.app.log("MainScreen", "show");
+    @Override
+    public void show()
+    {
+        Gdx.app.log("MainScreen", "show");
 
-	}
+    }
 
-	@Override
-	public void render(float delta)
-	{
-		// jave 8
+    @Override
+    public void render(float delta)
+    {
+        // jave 8
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act();
-		stage.draw();
-		// debugRenderer.render(world, stage.getCamera().combined);
-		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
-	}
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act();
+        stage.draw();
+        // debugRenderer.render(world, stage.getCamera().combined);
+        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+    }
 
-	@Override
-	public void resize(int width, int height)
-	{
+    @Override
+    public void resize(int width, int height)
+    {
 
-	}
+    }
 
-	@Override
-	public void pause()
-	{
+    @Override
+    public void pause()
+    {
 
-	}
+    }
 
-	@Override
-	public void resume()
-	{
+    @Override
+    public void resume()
+    {
 
-	}
+    }
 
-	@Override
-	public void hide()
-	{
+    @Override
+    public void hide()
+    {
 
-	}
+    }
 
-	@Override
-	public void dispose()
-	{
-		stage.dispose();
-	}
+    @Override
+    public void dispose()
+    {
+        stage.dispose();
+    }
 
 }

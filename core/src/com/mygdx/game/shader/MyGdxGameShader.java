@@ -12,38 +12,40 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MyGdxGameShader extends ApplicationAdapter
 {
-	private Stage stage;
 
-	@Override
-	public void create()
-	{
-		stage = new Stage(new ScreenViewport());
-		Gdx.input.setInputProcessor(stage);
-		Texture texture = new Texture("shader/background.jpg");
+    private Stage stage;
 
-		stage.addActor(ShockWave.getInstance());
+    @Override
+    public void create()
+    {
+        stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        Texture texture = new Texture("shader/background.jpg");
 
-		Image image1 = new Image(texture);
-		image1.setPosition(0, 0);
-		image1.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		image1.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y)
-			{
-				ShockWave.getInstance().start(x, y);
-			}
-		});
+        stage.addActor(ShockWave.getInstance());
 
-		ShockWave.getInstance().addActor(image1);
+        Image image1 = new Image(texture);
+        image1.setPosition(0, 0);
+        image1.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        image1.addListener(new ClickListener()
+        {
+            public void clicked(InputEvent event, float x, float y)
+            {
+                ShockWave.getInstance().start(x, y);
+            }
+        });
 
-	}
+        ShockWave.getInstance().addActor(image1);
 
-	@Override
-	public void render()
-	{
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act();
-		stage.draw();
+    }
 
-	}
+    @Override
+    public void render()
+    {
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act();
+        stage.draw();
+
+    }
 }

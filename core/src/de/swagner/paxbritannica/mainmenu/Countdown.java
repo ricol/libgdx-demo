@@ -4,92 +4,102 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-
 import de.swagner.paxbritannica.Resources;
 
-public class Countdown extends Sprite {
+public class Countdown extends Sprite
+{
 
-	public boolean finished = false;
+    public boolean finished = false;
 
-	private boolean showed = true;
+    private boolean showed = true;
 
-	private float fade = 0.0f;
+    private float fade = 0.0f;
 
-	private int cnt = 5;
-	
-	float delta;
+    private int cnt = 5;
 
-	private Vector2 position = new Vector2();
+    float delta;
 
-	public Countdown(Vector2 position) {
-		this.position = position;
+    private Vector2 position = new Vector2();
 
-		changeTexture(5);
-	}
-	
-	public void reset() {
-		changeTexture(5);
-		finished = false;
-		showed = true;
-		fade = 0.0f;
-		cnt = 5;
-		this.setRotation(0);
-		this.setScale(1f);
-		this.setPosition(position.x, position.y);
-		this.setColor(0, 0, 0, 0);
-	}
+    public Countdown(Vector2 position)
+    {
+        this.position = position;
 
-	private void changeTexture(int id) {
+        changeTexture(5);
+    }
 
-		switch (id) {
-		case 5:
-			this.set(Resources.getInstance().cnt5);
-			break;
-		case 2:
-			this.set(Resources.getInstance().cnt2);
-			break;
-		case 3:
-			this.set(Resources.getInstance().cnt3);
-			break;
-		case 4:
-			this.set(Resources.getInstance().cnt4);
-			break;
-		default:
-			this.set(Resources.getInstance().cnt1);
-			break;
-		}
-		this.setRotation(0);
-		this.setScale(1f);
-		this.setPosition(position.x, position.y);
-		this.setColor(0, 0, 0, 1);
-	}
+    public void reset()
+    {
+        changeTexture(5);
+        finished = false;
+        showed = true;
+        fade = 0.0f;
+        cnt = 5;
+        this.setRotation(0);
+        this.setScale(1f);
+        this.setPosition(position.x, position.y);
+        this.setColor(0, 0, 0, 0);
+    }
 
-	@Override
-	public void draw(Batch batch) {
-		delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
-		
-		super.draw(batch);
+    private void changeTexture(int id)
+    {
 
-		if (cnt < 1) {
-			finished = true;
-			this.setColor(1, 1, 1, 0);
-			return;
-		}
+        switch (id)
+        {
+            case 5:
+                this.set(Resources.getInstance().cnt5);
+                break;
+            case 2:
+                this.set(Resources.getInstance().cnt2);
+                break;
+            case 3:
+                this.set(Resources.getInstance().cnt3);
+                break;
+            case 4:
+                this.set(Resources.getInstance().cnt4);
+                break;
+            default:
+                this.set(Resources.getInstance().cnt1);
+                break;
+        }
+        this.setRotation(0);
+        this.setScale(1f);
+        this.setPosition(position.x, position.y);
+        this.setColor(0, 0, 0, 1);
+    }
 
-		if (showed) {
-			fade = Math.min(fade + delta * 2.f, 1);
-		} else {
-			fade = Math.max(fade - delta * 2.f, 0);
-		}
-		this.setColor(1, 1, 1, fade);
+    @Override
+    public void draw(Batch batch)
+    {
+        delta = Math.min(0.06f, Gdx.graphics.getDeltaTime());
 
-		if (fade == 1) {
-			showed = !showed;
-		}
-		if (fade == 0) {
-			showed = !showed;
-			--cnt;
-			changeTexture(cnt);
-		}
-	}
+        super.draw(batch);
+
+        if (cnt < 1)
+        {
+            finished = true;
+            this.setColor(1, 1, 1, 0);
+            return;
+        }
+
+        if (showed)
+        {
+            fade = Math.min(fade + delta * 2.f, 1);
+        } else
+        {
+            fade = Math.max(fade - delta * 2.f, 0);
+        }
+        this.setColor(1, 1, 1, fade);
+
+        if (fade == 1)
+        {
+            showed = !showed;
+        }
+        if (fade == 0)
+        {
+            showed = !showed;
+            --cnt;
+            changeTexture(cnt);
+        }
+    }
 }

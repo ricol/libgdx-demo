@@ -1,5 +1,7 @@
 package com.mygdx.game.box2dlight;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -12,79 +14,76 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import box2dLight.PointLight;
-import box2dLight.RayHandler;
-
 public class MyGdxGameBox2dLight extends ApplicationAdapter
 {
-	SpriteBatch batch;
-	private World world;
-	private Stage stage;
-	private Box2DDebugRenderer debugRenderer;
 
-	private RayHandler rayHandler;
+    SpriteBatch batch;
+    private World world;
+    private Stage stage;
+    private Box2DDebugRenderer debugRenderer;
 
-	@Override
-	public void create()
-	{
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		world = new World(new Vector2(0, -3), true);
-		world.setContactListener(new B2dContactListener());
-		batch = new SpriteBatch();
+    private RayHandler rayHandler;
 
-		Gdx.input.setInputProcessor(stage);
-		float ratio = (float) (Gdx.graphics.getWidth()) / (float) (Gdx.graphics.getHeight());
+    @Override
+    public void create()
+    {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        world = new World(new Vector2(0, -3), true);
+        world.setContactListener(new B2dContactListener());
+        batch = new SpriteBatch();
 
-		stage = new Stage(new ScreenViewport());
-		stage.getCamera().position.set(0, 0, 10);
-		stage.getCamera().lookAt(0, 0, 0);
-		stage.getCamera().viewportWidth = 10;
-		stage.getCamera().viewportHeight = 10 / ratio;
-		debugRenderer = new Box2DDebugRenderer();
+        Gdx.input.setInputProcessor(stage);
+        float ratio = (float) (Gdx.graphics.getWidth()) / (float) (Gdx.graphics.getHeight());
 
-		GearActor gearActor = new GearActor(world, 0, 0, 3, 3);
-		stage.addActor(gearActor);
+        stage = new Stage(new ScreenViewport());
+        stage.getCamera().position.set(0, 0, 10);
+        stage.getCamera().lookAt(0, 0, 0);
+        stage.getCamera().viewportWidth = 10;
+        stage.getCamera().viewportHeight = 10 / ratio;
+        debugRenderer = new Box2DDebugRenderer();
 
-		new WindowsFrame(world, stage.getCamera().viewportWidth, stage.getCamera().viewportHeight);
+        GearActor gearActor = new GearActor(world, 0, 0, 3, 3);
+        stage.addActor(gearActor);
 
-		rayHandler = new RayHandler(world);
-		rayHandler.setAmbientLight(0.1f, 0.1f, 0.1f, 1f);
-		rayHandler.setBlurNum(3);
+        new WindowsFrame(world, stage.getCamera().viewportWidth, stage.getCamera().viewportHeight);
 
-		PointLight pl = new PointLight(rayHandler, 128, new Color(0.2f, 1, 1, 1f), 10, -5, 2);
-		PointLight pl2 = new PointLight(rayHandler, 128, new Color(1, 0, 1, 1f), 10, 5, 2);
+        rayHandler = new RayHandler(world);
+        rayHandler.setAmbientLight(0.1f, 0.1f, 0.1f, 1f);
+        rayHandler.setBlurNum(3);
 
-		rayHandler.setShadows(true);
-		pl.setStaticLight(false);
-		pl.setSoft(true);
-		BallGenerator.getInstance().setup(stage, world);
-		stage.addActor(new FireEmitter(world));
-	}
+        PointLight pl = new PointLight(rayHandler, 128, new Color(0.2f, 1, 1, 1f), 10, -5, 2);
+        PointLight pl2 = new PointLight(rayHandler, 128, new Color(1, 0, 1, 1f), 10, 5, 2);
 
-	@Override
-	public void render()
-	{
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        rayHandler.setShadows(true);
+        pl.setStaticLight(false);
+        pl.setSoft(true);
+        BallGenerator.getInstance().setup(stage, world);
+        stage.addActor(new FireEmitter(world));
+    }
 
-		stage.act();
-		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
-		stage.draw();
+    @Override
+    public void render()
+    {
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		// debugRenderer.render(world, stage.getCamera().combined);
+        stage.act();
+        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+        stage.draw();
 
-		BallGenerator.getInstance().emit();
+        // debugRenderer.render(world, stage.getCamera().combined);
+        BallGenerator.getInstance().emit();
 
-		rayHandler.setCombinedMatrix(stage.getCamera().combined, 0, 0, 1, 1);
-		rayHandler.updateAndRender();
+        rayHandler.setCombinedMatrix(stage.getCamera().combined, 0, 0, 1, 1);
+        rayHandler.updateAndRender();
 
-	}
+    }
 
-	@Override
-	public void dispose()
-	{
-		batch.dispose();
-		rayHandler.dispose();
-	}
+    @Override
+    public void dispose()
+    {
+        batch.dispose();
+        rayHandler.dispose();
+    }
 
 }
