@@ -96,7 +96,8 @@ public class Assets
 				new TextureRegion(items, 64, 176, 64, 16), new TextureRegion(items, 64, 192, 64, 16),
 				new TextureRegion(items, 64, 208, 64, 16));
 
-		font = new BitmapFont(Gdx.files.internal("SuperJumper/data/font.fnt"), Gdx.files.internal("SuperJumper/data/font.png"), false);
+		font = new BitmapFont(Gdx.files.internal("SuperJumper/data/font.fnt"),
+				Gdx.files.internal("SuperJumper/data/font.png"), false);
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("SuperJumper/data/music.mp3"));
 		music.setLooping(true);
