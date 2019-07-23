@@ -1,15 +1,15 @@
 package au.com.deepspace.desktop;
 
+import com.badlogic.cubocy.Cubocy;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.ui.MyGdxGameUI;
 
 public class DesktopLauncher
 {
 	public static void main(String[] arg)
 	{
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MyGdxGameUI(), config);
+//		new LwjglApplication(new MyGdxGameUI(), config);
 //		new LwjglApplication(new MyGdxGameSwitch(), config);
 //		new LwjglApplication(new MyGdxGameShader(), config);
 //		new LwjglApplication(new MyGdxGameBox2dLight(), config);
@@ -20,5 +20,6 @@ public class DesktopLauncher
 //		new LwjglApplication(new SuperJumper(), config);
 //		new LwjglApplication(new Metagun(), config);
 //		new LwjglApplication(new Bouncy(), config);
+		new LwjglApplication(new Cubocy(), config);
 	}
 }
