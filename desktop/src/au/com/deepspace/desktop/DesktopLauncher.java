@@ -1,8 +1,9 @@
 package au.com.deepspace.desktop;
 
-import com.badlogic.cubocy.Cubocy;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
+import de.swagner.paxbritannica.PaxBritannica;
 
 public class DesktopLauncher
 {
@@ -20,6 +21,7 @@ public class DesktopLauncher
 //		new LwjglApplication(new SuperJumper(), config);
 //		new LwjglApplication(new Metagun(), config);
 //		new LwjglApplication(new Bouncy(), config);
-		new LwjglApplication(new Cubocy(), config);
+//		new LwjglApplication(new Cubocy(), config);
+		new LwjglApplication(new PaxBritannica(), config);
 	}
 }
