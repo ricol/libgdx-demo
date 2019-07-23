@@ -55,8 +55,7 @@ public class ShockWave extends Group
 		this.shockWavePositionX = posX;
 		this.shockWavePositionY = posY;
 		RunnableAction enable = new RunnableAction();
-		enable.setRunnable(new Runnable()
-		{
+		enable.setRunnable(new Runnable() {
 			@Override
 			public void run()
 			{

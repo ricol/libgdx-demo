@@ -460,8 +460,7 @@ public abstract class Light implements Disposable
 	/** This light specific filter **/
 	private Filter filterA = null;
 
-	final RayCastCallback ray = new RayCastCallback()
-	{
+	final RayCastCallback ray = new RayCastCallback() {
 		@Override
 		final public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction)
 		{

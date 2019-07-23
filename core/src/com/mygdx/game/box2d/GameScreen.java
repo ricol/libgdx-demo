@@ -34,8 +34,7 @@ public class GameScreen implements Screen
 
 		MusicalNote musicalNote = new MusicalNote(world, Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight());
 		stage.addActor(musicalNote);
-		musicalNote.addListener(new InputListener()
-		{
+		musicalNote.addListener(new InputListener() {
 
 			public void clicked(InputEvent event, float x, float y, int pointer, int button)
 			{

@@ -26,8 +26,7 @@ public class MyGdxGameShader extends ApplicationAdapter
 		Image image1 = new Image(texture);
 		image1.setPosition(0, 0);
 		image1.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		image1.addListener(new ClickListener()
-		{
+		image1.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y)
 			{
 				ShockWave.getInstance().start(x, y);

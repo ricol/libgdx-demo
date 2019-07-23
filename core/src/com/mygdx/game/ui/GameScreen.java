@@ -42,8 +42,7 @@ public class GameScreen implements Screen
 		multiplexer.addProcessor((gameStage));
 
 		Image map = new Image(new Texture("ui/map.jpg"));
-		map.addListener(new ActorGestureListener()
-		{
+		map.addListener(new ActorGestureListener() {
 			@Override
 			public void pan(InputEvent event, float x, float y, float deltaX, float deltaY)
 			{
@@ -70,8 +69,7 @@ public class GameScreen implements Screen
 		slider.setHeight(Gdx.graphics.getHeight() * 0.8f);
 		slider.setPosition(Gdx.graphics.getWidth() / 12, Gdx.graphics.getHeight() / 10);
 		slider.setValue(1.55f);
-		slider.addListener(new InputListener()
-		{
+		slider.addListener(new InputListener() {
 			@Override
 			public void touchDragged(InputEvent event, float x, float y, int pointer)
 			{

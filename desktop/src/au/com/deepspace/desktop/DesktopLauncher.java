@@ -2,7 +2,7 @@ package au.com.deepspace.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.particles.MyGdxGameParticles;
+import com.badlogicgames.superjumper.SuperJumper;
 
 public class DesktopLauncher
 {
@@ -16,6 +16,8 @@ public class DesktopLauncher
 //		new LwjglApplication(new MyGdxGameBox2d(), config);
 //		new LwjglApplication(new MyGdxGameParallax(), config);
 //		new LwjglApplication(new MyGdxGameCamera(), config);
-		new LwjglApplication(new MyGdxGameParticles(), config);
+//		new LwjglApplication(new MyGdxGameParticles(), config);
+		new LwjglApplication(new SuperJumper(), config);
+//		new LwjglApplication(new Metagun(), config);
 	}
 }

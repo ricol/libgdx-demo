@@ -36,8 +36,7 @@ public class GameScreen implements Screen
 		backButton.setWidth(Gdx.graphics.getWidth() / 2);
 		backButton.setPosition(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2,
 				Gdx.graphics.getHeight() / 4 - backButton.getHeight() / 2);
-		backButton.addListener(new InputListener()
-		{
+		backButton.addListener(new InputListener() {
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button)
 			{
