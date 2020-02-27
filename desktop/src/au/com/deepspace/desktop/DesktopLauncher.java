@@ -23,5 +23,6 @@ public class DesktopLauncher
 //		new LwjglApplication(new Bouncy(), config);
 //		new LwjglApplication(new Cubocy(), config);
         new LwjglApplication(new PaxBritannica(), config);
+//        new LwjglApplication(new Scene2dHitDetectionDemo(), config);
     }
 }
